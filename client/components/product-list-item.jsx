@@ -1,5 +1,7 @@
 import React from 'react';
 
+// import ProductDetails from './product-details';
+
 export default class ProductListItem extends React.Component {
 
   render() {
@@ -12,6 +14,7 @@ export default class ProductListItem extends React.Component {
           <div className="prod-card-name">{this.props.name}</div>
           <div className="prod-card-price">${this.props.price}</div>
           <div className="prod-card-desc">{this.props.description}</div>
+          {/* <ProductDetails id={this.props.key} /> */}
         </div>
       </div>
     );

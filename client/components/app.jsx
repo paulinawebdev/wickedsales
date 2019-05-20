@@ -8,7 +8,11 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      products: []
+      products: [],
+      view: {
+        name: 'catalog',
+        params: {}
+      }
     };
   }
 
@@ -21,6 +25,8 @@ export default class App extends React.Component {
       .then(res => res.json())
       .then(data => this.setState({ products: data }));
   }
+
+  setView(name, params) {}
 
   render() {
     return (
