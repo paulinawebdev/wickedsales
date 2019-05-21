@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
+import ProductDetails from './product-details';
 
 export default class App extends React.Component {
 
@@ -14,6 +15,9 @@ export default class App extends React.Component {
         params: {}
       }
     };
+
+    this.setView = this.setView.bind(this);
+
   }
 
   componentDidMount() {
@@ -26,13 +30,21 @@ export default class App extends React.Component {
       .then(data => this.setState({ products: data }));
   }
 
-  setView(name, params) {}
+  setView(name, params) {
+    this.setState(
+      {
+        view: {
+          name: name,
+          params: params
+        }
+      });
+  }
 
   render() {
     return (
       <div>
         <Header />
-        <ProductList products={this.state.products} />
+        {this.state.view.name === 'catalog' ? <ProductList products={this.state.products} setViewCallback={this.setView} /> : <ProductDetails backCallback={this.setView} id={this.state.view.params.id} />}
       </div>
     );
   }
