@@ -10,12 +10,58 @@
     padding: 0 1rem;
 }
 
+.btn {
+    padding: .5rem 1.5rem;
+    background-color: #B24B52;
+    border-color: #B24B52;
+    color: #FFF;
+    font-weight: bold;
+}
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
 img {
     width: 100%;
 }
 
 header {
     padding: 2rem 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.logo h1, .logo i {
+    font-family: Creepster;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    letter-spacing: 2px;
+    background-color: #000;
+    background-image: url(images/lightning.gif);
+    background-position: center;
+    background-size: cover;
+}
+
+.logo i::before {
+    font-family: 'Font Awesome\ 5 Free';
+}
+
+.cart {
+    display: inline-block;
+}
+
+.cart i {
+    font-size: 1.5rem;
+}
+
+.cart-amount {
+    margin-right: .5rem;
 }
 
 .back-btn {
@@ -46,7 +92,7 @@ header {
 }
 
 .prod-card-info > div {
-    margin-bottom: .25rem;
+    margin-bottom: .5rem;
 }
 
 .prod-card-name {
@@ -71,6 +117,10 @@ header {
 .prod-detail-info {
     width: 65%;
     padding: 2rem;
+}
+
+.prod-detail-info > * {
+    margin-bottom: 1rem;
 }
 
 .prod-detail-desc {

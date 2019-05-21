@@ -43,6 +43,7 @@ export default class ProductDetails extends React.Component {
             <h2>{this.state.name}</h2>
             <p>{(this.state.price / 100).toFixed(2)}</p>
             <p>{this.state.shortDesc}</p>
+            <button className="btn btn-cart" onClick={() => this.props.cartCallback(this.state.id)}>Add to Cart</button>
           </div>
           <div className="prod-detail-desc">
             <p>{this.state.longDesc}</p>
