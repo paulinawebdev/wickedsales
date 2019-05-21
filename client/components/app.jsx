@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
+import CartSummary from './cart-summary';
 
 export default class App extends React.Component {
 
@@ -65,10 +66,21 @@ export default class App extends React.Component {
   }
 
   render() {
+
+    let view;
+
+    if (this.state.view.name === 'catalog') {
+      view = <ProductList setViewCallback={this.setView} products={this.state.products} />;
+    } else if (this.state.view.name === 'details') {
+      view = <ProductDetails setViewCallback={this.setView} cartCallback={this.addToCart} id={this.state.view.params.id} />;
+    } else if (this.state.view.name === 'cart') {
+      view = <CartSummary setViewCallback={this.setView} cartSummary={this.state.cart} />;
+    }
+
     return (
       <div>
-        <Header cartItems={this.state.cart} />
-        {this.state.view.name === 'catalog' ? <ProductList products={this.state.products} setViewCallback={this.setView} /> : <ProductDetails backCallback={this.setView} cartCallback={this.addToCart} id={this.state.view.params.id} />}
+        <Header cartItems={this.state.cart} setViewCallback={this.setView} />
+        {view}
       </div>
     );
   }

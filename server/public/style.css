@@ -7,7 +7,7 @@
 .pg-width {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
 }
 
 .btn {
@@ -52,11 +52,12 @@ header {
     font-family: 'Font Awesome\ 5 Free';
 }
 
-.cart {
+.header-cart {
     display: inline-block;
+    cursor: pointer;
 }
 
-.cart i {
+.header-cart i {
     font-size: 1.5rem;
 }
 

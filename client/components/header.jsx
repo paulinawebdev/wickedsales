@@ -8,7 +8,7 @@ export default class Header extends React.Component {
         <div className="pg-width">
           <div className="header-content">
             <div className="logo"><h1><i className="fas fa-bolt"></i> Wicked Sales</h1></div>
-            <div className="cart">
+            <div className="header-cart" onClick={() => this.props.setViewCallback('cart', {})}>
               <span className="cart-amount">{this.props.cartItems.length} Items</span>
               <i className="fas fa-shopping-cart"></i>
             </div>

@@ -35,7 +35,7 @@ export default class ProductDetails extends React.Component {
     return (
 
       <div className="pg-width">
-        <div className="back-btn" onClick={() => this.props.backCallback('catalog', {})}><i className="fas fa-chevron-left"></i> Back to Catalog</div>
+        <div className="back-btn" onClick={() => this.props.setViewCallback('catalog', {})}><i className="fas fa-chevron-left"></i> Back to Catalog</div>
 
         <div className="prod-detail">
           <div className="prod-detail-img"><img src={this.state.image} /></div>
