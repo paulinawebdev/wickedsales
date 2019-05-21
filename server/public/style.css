@@ -18,6 +18,11 @@ header {
     padding: 2rem 0;
 }
 
+.back-btn {
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
 .prod-list {
     display: flex;
     flex-wrap: wrap;
@@ -25,6 +30,7 @@ header {
 }
 
 .prod-card {
+    cursor: pointer;
     width: 30%;
     border: 1px solid #CCC;
     margin-bottom: 2rem;
@@ -50,4 +56,23 @@ header {
 
 .prod-card-price {
     color: gray;
+}
+
+.prod-detail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.prod-detail-img {
+    width: 35%;
+}
+
+.prod-detail-info {
+    width: 65%;
+    padding: 2rem;
+}
+
+.prod-detail-desc {
+    margin-top: 2rem;
 }
