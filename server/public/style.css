@@ -7,7 +7,7 @@
 .pg-width {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
 }
 
 .btn {
@@ -26,6 +26,7 @@ img {
     width: 100%;
 }
 
+/*header*/
 header {
     padding: 2rem 0;
 }
@@ -36,6 +37,10 @@ header {
     flex-wrap: wrap;
 }
 
+.logo {
+    cursor: default;
+}
+
 .logo h1, .logo i {
     font-family: Creepster;
     color: transparent;
@@ -43,6 +48,8 @@ header {
     background-clip: text;
     letter-spacing: 2px;
     background-color: #000;
+}
+.logo:hover h1, .logo:hover i {
     background-image: url(images/lightning.gif);
     background-position: center;
     background-size: cover;
@@ -52,11 +59,16 @@ header {
     font-family: 'Font Awesome\ 5 Free';
 }
 
-.cart {
+.header-cart {
     display: inline-block;
+    cursor: pointer;
 }
 
-.cart i {
+.header-cart:hover {
+    color: #B24B52;
+}
+
+.header-cart i {
     font-size: 1.5rem;
 }
 
@@ -69,6 +81,7 @@ header {
     margin-bottom: 2rem;
 }
 
+/*product catalog page*/
 .prod-list {
     display: flex;
     flex-wrap: wrap;
@@ -104,6 +117,7 @@ header {
     color: gray;
 }
 
+/*product detail page*/
 .prod-detail {
     display: flex;
     flex-wrap: wrap;
@@ -125,4 +139,38 @@ header {
 
 .prod-detail-desc {
     margin-top: 2rem;
+}
+
+/*cart*/
+
+.cart-summary h1 {
+    margin-bottom: 1rem;
+}
+.cart-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid #000;
+    margin-bottom: 2rem;
+}
+
+.cart-item-content {
+    padding: 1rem;
+}
+
+.cart-item-content > div {
+    margin-bottom: .5rem;
+}
+
+.cart-item-name {
+    font-size: 1.5rem;
+}
+
+.cart-item-img {
+    max-width:200px;
+}
+
+.cart-total-price {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
 }
