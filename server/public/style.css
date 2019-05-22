@@ -142,10 +142,35 @@ header {
 }
 
 /*cart*/
+
+.cart-summary h1 {
+    margin-bottom: 1rem;
+}
 .cart-item {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid #000;
+    margin-bottom: 2rem;
 }
+
+.cart-item-content {
+    padding: 1rem;
+}
+
+.cart-item-content > div {
+    margin-bottom: .5rem;
+}
+
+.cart-item-name {
+    font-size: 1.5rem;
+}
+
 .cart-item-img {
     max-width:200px;
+}
+
+.cart-total-price {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
 }
