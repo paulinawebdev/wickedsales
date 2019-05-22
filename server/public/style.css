@@ -18,6 +18,32 @@
     font-weight: bold;
 }
 
+/*form styles*/
+.form-input {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.form-input input {
+    position: relative;
+    z-index: 2;
+    padding: .5rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.form-input input + label {
+    position: absolute;
+    top: 1px;
+    left: 0;
+    z-index: 1;
+    transition: all .25s;
+}
+
+.form-input input:focus + label {
+    transform: translateY(-100%);
+}
+
 body {
     font-family: 'Josefin Sans', sans-serif;
 }
@@ -173,4 +199,11 @@ header {
 .cart-total-price {
     margin-bottom: 2rem;
     font-size: 1.5rem;
+}
+
+/*checkout page*/
+
+
+.checkout-total {
+    margin: 2rem 0;
 }
