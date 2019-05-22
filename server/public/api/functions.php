@@ -9,4 +9,8 @@
         print $json_output;
     }
 
+    function startup() {
+        header('Content-Type: application/json');
+    }
+
 ?>
