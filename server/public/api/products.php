@@ -13,29 +13,17 @@
   }
 
   $query = "SELECT * FROM productList";
-
-  $res = $conn->query($query);
-  if ($conn->error) {
-      try {    
-          throw new Exception("MySQL error $conn->error <br> Query:<br> $query");    
-      } catch(Exception $e ) {
-          echo "error: ". $e->getMessage();
-      }
-  }
   
   if ($result = mysqli_query($conn, $query)) {
       $numRows = mysqli_num_rows($result);
-  }
-
-  if ($numRows === 0) {
-    print "no data available";
-    exit();
+  } else {
+      throw new Exception('there is an error' . mysqli_connect_error());
   }
 
   $output = [];
 
   while ($row = mysqli_fetch_assoc($result)) {  
-      array_push($output, $row);
+      $output[] = $row;
   }
 
   $json_output = json_encode($output);
