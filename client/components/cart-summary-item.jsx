@@ -8,8 +8,12 @@ export default class CartSummaryItem extends React.Component {
     console.log('cart item : ', cartItem);
     return (
       <div className="cart-item">
-        <div className="cart-item-img">testing</div>
-        <div className="cart-item-desc">name here</div>
+        <div className="cart-item-img"><img src={cartItem.image} /></div>
+        <div className="cart-item-desc">
+          <div className="cart-item-name">{cartItem.name}</div>
+          <div className="cart-item-price">${(cartItem.price / 100).toFixed(2)}</div>
+          <div className="cart-item-desc">{cartItem.shortDescription}</div>
+        </div>
       </div>
     );
   }
