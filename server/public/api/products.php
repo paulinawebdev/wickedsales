@@ -12,43 +12,29 @@
     throw new Exception('there is an error' . mysqli_connect_error());
   }
 
-
   if (empty($_GET['id'])) {
-    //readfile('dummy-products-list.json');
-
-    $query = "SELECT * FROM productList";
-    
-    if ($result = mysqli_query($conn, $query)) {
-        $numRows = mysqli_num_rows($result);
-    } else {
-        throw new Exception('there is an error' . mysqli_connect_error());
-    }
-
-    $output = [];
-
-    while ($row = mysqli_fetch_assoc($result)) {  
-        $output[] = $row;
-    }
-
-    $json_output = json_encode($output);
-    print $json_output;
-
+    $whereClause = "";
   } else {
-    //readfile('dummy-product-details.json');
-    $query = "SELECT * FROM productList WHERE id = " . ($_GET['id']);
-    
-    if ($result = mysqli_query($conn, $query)) {
-        $numRows = mysqli_num_rows($result);
-    } else {
-        throw new Exception('there is an error' . mysqli_connect_error());
-    }
-
-    while ($row = mysqli_fetch_assoc($result)) {  
-        $output = $row;
-    }
-
-    $json_output = json_encode($output);
-    print $json_output;
+    $whereClause = "WHERE id = " . ($_GET['id']);
   }
+
+  $query = "SELECT * FROM `productList`" . $whereClause;
+
+  if ($result = mysqli_query($conn, $query)) {
+      $numRows = mysqli_num_rows($result);
+  } else {
+      throw new Exception('there is an error' . mysqli_connect_error());
+  }
+
+  $output = [];
+
+  while ($row = mysqli_fetch_assoc($result)) { 
+    $row['price'] = (int)$row['price'];
+    $row['id'] = (int)$row['id']; 
+    $output[] = $row;
+  }
+
+  $json_output = json_encode($output);
+  print $json_output;
 
 ?>
