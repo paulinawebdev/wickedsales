@@ -30,7 +30,6 @@ export default class ProductDetails extends React.Component {
           price: data.price,
           shortDesc: data.shortDescription
         });
-        return data.id;
       });
   }
 

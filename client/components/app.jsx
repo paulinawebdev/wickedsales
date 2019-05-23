@@ -57,18 +57,18 @@ export default class App extends React.Component {
       });
   }
 
-  placeOrder(order) {
+  placeOrder(orderInfo) {
     fetch('api/orders.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(order)
+      body: JSON.stringify(orderInfo)
     })
       .then(res => res.json())
-      .then(data => {
-        this.setState({ view: { name: 'catalog', params: {} } });
-      });
+      .then(data => data);
+
+    this.setState({ cart: [], view: { name: 'catalog', params: {} } });
   }
 
   setView(name, params) {
@@ -92,7 +92,7 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'cart') {
       view = <CartSummary setViewCallback={this.setView} cartSummary={this.state.cart} />;
     } else if (this.state.view.name === 'checkout') {
-      view = <CheckoutForm setViewCallback={this.setView} placeOrderCallback={this.placeOrder} />;
+      view = <CheckoutForm placeOrderCallback={this.placeOrder} />;
     }
 
     return (
