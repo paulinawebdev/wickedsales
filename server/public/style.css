@@ -18,6 +18,35 @@
     font-weight: bold;
 }
 
+/*form styles*/
+.form-input {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.form-input input, .form-input textarea {
+    position: relative;
+    padding: .5rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.form-input input + label, .form-input textarea + label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform:translateY(-50%);
+    transition: all .25s;
+}
+
+.form-input input + label.label-show, .form-input textarea + label.label-show {
+    top: -10px;
+}
+
+.form-input input:focus + label, .form-input textarea:focus + label {
+    top: -10px;
+}
+
 body {
     font-family: 'Josefin Sans', sans-serif;
 }
@@ -173,4 +202,11 @@ header {
 .cart-total-price {
     margin-bottom: 2rem;
     font-size: 1.5rem;
+}
+
+/*checkout page*/
+
+
+.checkout-total {
+    margin: 2rem 0;
 }

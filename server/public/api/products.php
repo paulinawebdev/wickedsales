@@ -12,29 +12,43 @@
     throw new Exception('there is an error' . mysqli_connect_error());
   }
 
-  $query = "SELECT * FROM productList";
-  
-  if ($result = mysqli_query($conn, $query)) {
-      $numRows = mysqli_num_rows($result);
-  } else {
-      throw new Exception('there is an error' . mysqli_connect_error());
-  }
 
-  $output = [];
+  if (empty($_GET['id'])) {
+    //readfile('dummy-products-list.json');
 
-  while ($row = mysqli_fetch_assoc($result)) {  
-      $output[] = $row;
-  }
+    $query = "SELECT * FROM productList";
+    
+    if ($result = mysqli_query($conn, $query)) {
+        $numRows = mysqli_num_rows($result);
+    } else {
+        throw new Exception('there is an error' . mysqli_connect_error());
+    }
 
-  $json_output = json_encode($output);
+    $output = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {  
+        $output[] = $row;
+    }
+
+    $json_output = json_encode($output);
     print $json_output;
 
-// header('Content-Type: application/json');
+  } else {
+    //readfile('dummy-product-details.json');
+    $query = "SELECT * FROM productList WHERE id = " . ($_GET['id']);
+    
+    if ($result = mysqli_query($conn, $query)) {
+        $numRows = mysqli_num_rows($result);
+    } else {
+        throw new Exception('there is an error' . mysqli_connect_error());
+    }
 
-// if (empty($_GET['id'])) {
-//   readfile('dummy-products-list.json');
-// } else {
-//   readfile('dummy-product-details.json');
-// }
+    while ($row = mysqli_fetch_assoc($result)) {  
+        $output = $row;
+    }
+
+    $json_output = json_encode($output);
+    print $json_output;
+  }
 
 ?>
