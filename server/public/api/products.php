@@ -19,7 +19,6 @@
   } else {
 
     if (is_numeric($_GET['id'])) {
-
       $id = (int)$_GET['id'];
       $whereClause = "WHERE id = $id";
     } else {
@@ -46,6 +45,10 @@
     $row['price'] = (int)$row['price'];
     $row['id'] = (int)$row['id']; 
     $output[] = $row;
+  }
+
+  if ($id) {
+    $output = $output[0];
   }
 
   $json_output = json_encode($output);
