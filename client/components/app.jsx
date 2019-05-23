@@ -3,6 +3,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
+import CheckoutForm from './checkout-form';
 
 export default class App extends React.Component {
 
@@ -20,6 +21,7 @@ export default class App extends React.Component {
 
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
 
   }
 
@@ -55,6 +57,20 @@ export default class App extends React.Component {
       });
   }
 
+  placeOrder(orderInfo) {
+    fetch('api/orders.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderInfo)
+    })
+      .then(res => res.json())
+      .then(data => data);
+
+    this.setState({ cart: [], view: { name: 'catalog', params: {} } });
+  }
+
   setView(name, params) {
     this.setState(
       {
@@ -75,6 +91,8 @@ export default class App extends React.Component {
       view = <ProductDetails setViewCallback={this.setView} cartCallback={this.addToCart} id={this.state.view.params.id} />;
     } else if (this.state.view.name === 'cart') {
       view = <CartSummary setViewCallback={this.setView} cartSummary={this.state.cart} />;
+    } else if (this.state.view.name === 'checkout') {
+      view = <CheckoutForm placeOrderCallback={this.placeOrder} />;
     }
 
     return (

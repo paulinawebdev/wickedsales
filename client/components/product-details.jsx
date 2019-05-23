@@ -19,16 +19,18 @@ export default class ProductDetails extends React.Component {
   }
 
   getData(id) {
-    fetch('api/products.php?id=' + { id })
+    fetch('api/products.php?id=' + id)
       .then(res => res.json())
-      .then(data => this.setState({
-        id: data.id,
-        image: data.image,
-        longDesc: data.longDescription,
-        name: data.name,
-        price: data.price,
-        shortDesc: data.shortDescription
-      }));
+      .then(data => {
+        this.setState({
+          id: data.id,
+          image: data.image,
+          longDesc: data.longDescription,
+          name: data.name,
+          price: data.price,
+          shortDesc: data.shortDescription
+        });
+      });
   }
 
   render() {

@@ -22,6 +22,8 @@ export default class CartSummary extends React.Component {
         <h1>My Cart</h1>
         {cartItems.length ? cartItems : 'No Cart Items'}
         <div className="cart-total-price">Item Total: {(cartTotal / 100).toFixed(2)}</div>
+
+        <div className="btn checkout-btn" onClick={() => this.props.setViewCallback('checkout', {})}>Checkout</div>
       </div>
     );
   }
