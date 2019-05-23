@@ -13,12 +13,20 @@
   }
 
   if (empty($_GET['id'])) {
+
     $whereClause = "";
+
   } else {
-    $whereClause = "WHERE id = " . ($_GET['id']);
+
+    if (is_numeric($_GET['id'])) {
+      $whereClause = "WHERE id = " . (int)$_GET['id'];
+    } else {
+      throw new Exception('id needs to be a number');
+    }
+
   }
 
-  $query = "SELECT * FROM `productList`" . $whereClause;
+  $query = "SELECT * FROM `productList` $whereClause";
 
   if ($result = mysqli_query($conn, $query)) {
       $numRows = mysqli_num_rows($result);
