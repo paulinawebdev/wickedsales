@@ -12,14 +12,16 @@
     throw new Exception('there is an error' . mysqli_connect_error());
   }
 
+  $id = false;
+
   if (empty($_GET['id'])) {
-
     $whereClause = "";
-
   } else {
 
     if (is_numeric($_GET['id'])) {
-      $whereClause = "WHERE id = " . (int)$_GET['id'];
+
+      $id = (int)$_GET['id'];
+      $whereClause = "WHERE id = $id";
     } else {
       throw new Exception('id needs to be a number');
     }
@@ -32,6 +34,10 @@
       $numRows = mysqli_num_rows($result);
   } else {
       throw new Exception('there is an error' . mysqli_connect_error());
+  }
+
+  if ($numRows === 0 && $id !== false) {
+    throw new Exception("invalid id: $id");
   }
 
   $output = [];
