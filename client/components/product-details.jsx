@@ -35,24 +35,24 @@ export default class ProductDetails extends React.Component {
 
   render() {
     return (
+      <div className="pg-content">
+        <div className="pg-width">
+          <div className="back-btn" onClick={() => this.props.setViewCallback('catalog', {})}><i className="fas fa-chevron-left"></i> Back to Catalog</div>
 
-      <div className="pg-width">
-        <div className="back-btn" onClick={() => this.props.setViewCallback('catalog', {})}><i className="fas fa-chevron-left"></i> Back to Catalog</div>
-
-        <div className="prod-detail">
-          <div className="prod-detail-img"><img src={this.state.image} /></div>
-          <div className="prod-detail-info">
-            <h2>{this.state.name}</h2>
-            <p>{(this.state.price / 100).toFixed(2)}</p>
-            <p>{this.state.shortDesc}</p>
-            <button className="btn btn-cart" onClick={() => this.props.cartCallback(this.state)}>Add to Cart</button>
-          </div>
-          <div className="prod-detail-desc">
-            <p>{this.state.longDesc}</p>
+          <div className="prod-detail">
+            <div className="prod-detail-img"><img src={this.state.image} /></div>
+            <div className="prod-detail-info">
+              <h2>{this.state.name}</h2>
+              <p>{(this.state.price / 100).toFixed(2)}</p>
+              <p>{this.state.shortDesc}</p>
+              <button className="btn btn-cart" onClick={() => this.props.cartCallback(this.state)}>Add to Cart</button>
+            </div>
+            <div className="prod-detail-desc">
+              <p>{this.state.longDesc}</p>
+            </div>
           </div>
         </div>
       </div>
-
     );
   }
 }

@@ -19,8 +19,10 @@ export default class ProductList extends React.Component {
     let productItems = products.map(productItem => <ProductListItem handleDetails={ () => this.handleDetails(productItem)} key={productItem.id} image={productItem.image} name={productItem.name} price={productItem.price} description={productItem.shortDescription} />);
 
     return (
-      <div className="prod-list pg-width">
-        {productItems}
+      <div className="pg-content">
+        <div className="prod-list pg-width">
+          {productItems}
+        </div>
       </div>
     );
   }
