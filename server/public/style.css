@@ -1,3 +1,11 @@
+/*colors*/
+/*
+almost black: #242424
+dark gray: #434343
+off white: #E3E3E4
+redish: #B24B52
+*/
+
 * {
     margin: 0;
     padding: 0;
@@ -58,6 +66,7 @@ img {
 /*header*/
 header {
     padding: 2rem 0;
+    background-color: #434343;
 }
 
 .header-content {
@@ -76,7 +85,9 @@ header {
     -webkit-background-clip: text;
     background-clip: text;
     letter-spacing: 2px;
-    background-color: #000;
+    background-color: #E3E3E4;
+    background-image: url(images/offwhite-bg.PNG);
+    transition: all ease-in .5s;
 }
 .logo:hover h1, .logo:hover i {
     background-image: url(images/lightning.gif);
@@ -91,6 +102,7 @@ header {
 .header-cart {
     display: inline-block;
     cursor: pointer;
+    color: #E3E3E4;
 }
 
 .header-cart:hover {
@@ -105,6 +117,10 @@ header {
     margin-right: .5rem;
 }
 
+.pg-content {
+    padding-top: 2rem;
+}
+
 .back-btn {
     cursor: pointer;
     margin-bottom: 2rem;
@@ -117,29 +133,43 @@ header {
     justify-content: space-between;
 }
 
-.prod-card {
-    cursor: pointer;
-    width: 30%;
-    border: 1px solid #CCC;
+.prod-card-container {
+    width: 33.33%;
+    padding: .5rem;
     margin-bottom: 2rem;
 }
 
-.prod-card-img {
-    height: 300px;
-    overflow: hidden;
+.prod-card {
+    cursor: pointer;
 }
 
 .prod-card-info {
-    padding: 1.25rem;
+    padding: 0 1.25rem;
 }
 
 .prod-card-info > div {
     margin-bottom: .5rem;
 }
 
+.prod-card-img {
+    overflow: hidden;
+}
+
+.prod-card .prod-card-img img {
+    transition: all .5s;
+}
+
+.prod-card:hover .prod-card-img img {
+    transform: scale(1.2);
+}
+
 .prod-card-name {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.prod-card:hover .prod-card-name {
+    color: #B24B52;
 }
 
 .prod-card-price {
@@ -209,4 +239,26 @@ header {
 
 .checkout-total {
     margin: 2rem 0;
+}
+
+
+@media screen and (max-width: 768px) {
+    .prod-card-name {
+        font-size: 1.25rem;
+    }
+    .prod-card-desc {
+        font-size: .9rem;
+    }
+}
+
+@media screen and (max-width: 625px) {
+    .prod-card-container {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .prod-card-container {
+        width: 100%;
+    }
 }

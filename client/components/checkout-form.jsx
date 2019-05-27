@@ -40,8 +40,8 @@ export default class CheckoutForm extends React.Component {
     const classAddress = this.state.shippingAddress ? 'label-show' : null;
 
     return (
-      <div className="checkout-page">
-        <div className="pg-width">
+      <div className="pg-content">
+        <div className="checkout-page pg-width">
           <div className="back-btn" onClick={() => this.props.setViewCallback('catalog', {})}><i className="fas fa-chevron-left"></i> Back to Catalog</div>
           <h1>Checkout</h1>
           <div className="checkout-total">Order Total: $0</div>
