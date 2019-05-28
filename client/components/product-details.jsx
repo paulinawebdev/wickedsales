@@ -10,7 +10,8 @@ export default class ProductDetails extends React.Component {
       longDesc: null,
       name: null,
       price: null,
-      shortDesc: null
+      shortDesc: null,
+      url: null
     };
   }
 
@@ -28,7 +29,8 @@ export default class ProductDetails extends React.Component {
           longDesc: data.longDescription,
           name: data.name,
           price: data.price,
-          shortDesc: data.shortDescription
+          shortDesc: data.shortDescription,
+          url: data.url
         });
       });
   }

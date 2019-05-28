@@ -20,14 +20,14 @@
 
     if (is_numeric($_GET['id'])) {
       $id = (int)$_GET['id'];
-      $whereClause = "WHERE id = $id";
+      $whereClause = "WHERE prodlist.id = $id";
     } else {
       throw new Exception('id needs to be a number');
     }
 
   }
 
-  $query = "SELECT * FROM `productList` $whereClause";
+  $query = "SELECT prodlist.id, prodlist.name, prodlist.price, prodlist.image, prodlist.shortDescription, prodlist.longDescription, img.url FROM `productList` AS prodlist JOIN `images` AS img ON prodlist.`id` = img.`productList_id` $whereClause";
 
   if ($result = mysqli_query($conn, $query)) {
       $numRows = mysqli_num_rows($result);
@@ -41,17 +41,31 @@
 
   $output = [];
 
-  while ($row = mysqli_fetch_assoc($result)) { 
-    $row['price'] = (int)$row['price'];
-    $row['id'] = (int)$row['id']; 
-    $output[] = $row;
+  while( $row = mysqli_fetch_assoc($result)) {
+    $rowID = $row['id'];
+
+    if(empty($output[$rowID])) {
+        $imageUrl = $row['url'];
+        unset($row['url']);
+        $row['url'] = [$imageUrl];
+        $output[$rowID] = $row;
+    } else {
+        $imageUrl = $row['url'];
+        $output[$rowID]['url'][] = $imageUrl;
+    }
+  }
+
+  $output2 = [];
+
+  foreach ($output as $key => $value) {
+    $output2[] = $value;
   }
 
   if ($id) {
-    $output = $output[0];
+    $output2 = $output2[0];
   }
 
-  $json_output = json_encode($output);
-  print $json_output;
+  $json_output2 = json_encode($output2);
+  print $json_output2;
 
 ?>
