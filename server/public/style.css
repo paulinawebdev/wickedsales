@@ -2,6 +2,7 @@
 /*
 almost black: #242424
 dark gray: #434343
+dark gray text: #5E5D5A
 off white: #E3E3E4
 redish: #B24B52
 */
@@ -11,19 +12,39 @@ redish: #B24B52
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    position: relative;
+}
 
+img {
+    width: 100%;
+}
+.wrapper {
+    min-height: 80vh;
+}
 .pg-width {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
 }
-
 .btn {
     padding: .5rem 1.5rem;
     background-color: #B24B52;
     border-color: #B24B52;
     color: #FFF;
     font-weight: bold;
+    text-align: center;
+    max-width: 150px;
+}
+
+.pg-content {
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+}
+.pg-title {
+    padding-left: 1rem;
+    margin-bottom: 1rem;
 }
 
 /*form styles*/
@@ -55,28 +76,21 @@ redish: #B24B52
     top: -10px;
 }
 
-body {
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-img {
-    width: 100%;
-}
-
 /*header*/
 header {
-    padding: 2rem 0;
-    background-color: #434343;
+    padding: 1rem 0;
+    background-color: #0B0C0D;
 }
 
 .header-content {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .logo {
-    cursor: default;
+    cursor: pointer;
 }
 
 .logo h1, .logo i {
@@ -90,7 +104,7 @@ header {
     transition: all ease-in .5s;
 }
 .logo:hover h1, .logo:hover i {
-    background-image: url(images/lightning.gif);
+    background-image: url(images/lightning1.gif);
     background-position: center;
     background-size: cover;
 }
@@ -117,34 +131,75 @@ header {
     margin-right: .5rem;
 }
 
-.pg-content {
-    padding-top: 2rem;
-}
-
 .back-btn {
     cursor: pointer;
     margin-bottom: 2rem;
+}
+
+/*footer*/ 
+footer {
+    padding: 2rem 0;
+    background-color: #0B0C0D;
+    width: 100%;
+}
+.footer-content {
+    text-align: center;
+}
+.footer-content .logo {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+.footer-content a {
+    color: #FFF;
+    text-decoration: none;
+    margin: .5rem;
+}
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
+/*banner*/
+.banner-content {
+    min-height: 415px;
+    width: 100%;
+    background-size: cover;
+    background-position: center; 
+    position: relative;
+}
+.banner-inner {
+    max-width: 400px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 1.5rem;
+    border: 1px solid;
+    background-color: rgba(0,0,0,.7);
+}
+.banner-inner > *:not(:last-child) {
+    margin-bottom: .75rem;
 }
 
 /*product catalog page*/
 .prod-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
-
 .prod-card-container {
-    width: 33.33%;
-    padding: .5rem;
-    margin-bottom: 2rem;
+    width: 25%;
+    margin-bottom: 1rem;
 }
 
 .prod-card {
     cursor: pointer;
+    background-color: #FFF;
+    border-radius: 5px;
+    padding: 1rem;
+    height: 100%;
 }
 
 .prod-card-info {
-    padding: 0 1.25rem;
+    margin-top: 1rem;
 }
 
 .prod-card-info > div {
@@ -153,6 +208,7 @@ header {
 
 .prod-card-img {
     overflow: hidden;
+    background-color: #CBC9C5;
 }
 
 .prod-card .prod-card-img img {
@@ -164,7 +220,7 @@ header {
 }
 
 .prod-card-name {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
@@ -173,7 +229,7 @@ header {
 }
 
 .prod-card-price {
-    color: gray;
+    color: #5E5D5A;
 }
 
 /*product detail page*/
@@ -236,13 +292,20 @@ header {
 
 /*checkout page*/
 
-
 .checkout-total {
     margin: 2rem 0;
 }
-
-
+@media screen and (max-width: 1000px) {
+    .prod-card-container {
+        width: 33.333%;
+    }
+}
 @media screen and (max-width: 768px) {
+    .banner-inner {
+        left: 50%;
+        width: 90%;
+        transform: translate(-50%, -50%);
+    }
     .prod-card-name {
         font-size: 1.25rem;
     }
@@ -252,6 +315,18 @@ header {
 }
 
 @media screen and (max-width: 625px) {
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+    .header-cart {
+        font-size: .8rem;
+    }
+    .header-cart i {
+        font-size: 1rem;
+    }
+    .pg-width {
+        padding: 0 1rem;
+    }
     .prod-card-container {
         width: 50%;
     }

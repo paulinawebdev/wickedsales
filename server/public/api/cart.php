@@ -6,7 +6,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 $item = file_get_contents('php://input');
 
 if ($method == 'GET') {
-  readfile('dummy-cart-items.json');
+  // readfile('dummy-cart-items.json');
 } else if ($method == 'POST') {
   http_response_code(201);
   print($item);

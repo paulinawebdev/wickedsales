@@ -20,8 +20,11 @@ export default class ProductList extends React.Component {
 
     return (
       <div className="pg-content">
-        <div className="prod-list pg-width">
-          {productItems}
+        <div className="pg-width">
+          <h1 className="pg-title">Pin Collection</h1>
+          <div className="prod-list">
+            {productItems}
+          </div>
         </div>
       </div>
     );

@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from './header';
+import Banner from './banner';
+import Footer from './footer';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
@@ -86,7 +88,12 @@ export default class App extends React.Component {
     let view;
 
     if (this.state.view.name === 'catalog') {
-      view = <ProductList setViewCallback={this.setView} products={this.state.products} />;
+      view = (
+        <div>
+          <Banner image="/images/banner-5.jpg" />
+          <ProductList setViewCallback={this.setView} products={this.state.products} />
+        </div>
+      );
     } else if (this.state.view.name === 'details') {
       view = <ProductDetails setViewCallback={this.setView} cartCallback={this.addToCart} id={this.state.view.params.id} />;
     } else if (this.state.view.name === 'cart') {
@@ -96,10 +103,13 @@ export default class App extends React.Component {
     }
 
     return (
-      <div>
-        <Header cartItems={this.state.cart} setViewCallback={this.setView} />
-        {view}
-      </div>
+      <React.Fragment>
+        <div className="wrapper">
+          <Header cartItems={this.state.cart} setViewCallback={this.setView} />
+          {view}
+        </div>
+        <Footer setViewCallback={this.setView} />
+      </React.Fragment>
     );
   }
 }
