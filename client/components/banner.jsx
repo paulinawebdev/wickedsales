@@ -13,7 +13,6 @@ export default class Banner extends React.Component {
           <div className="banner-inner">
             <h1>Wicked Sales</h1>
             <p>Shop the Largest Selection of Spooky Pins</p>
-            <div className="btn">Shop Now</div>
           </div>
         </div>
       </div>

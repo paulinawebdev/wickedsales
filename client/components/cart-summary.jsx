@@ -6,21 +6,28 @@ export default class CartSummary extends React.Component {
   render() {
 
     const cart = this.props.cartSummary;
-    let cartItems = cart.map(cartItem => <CartSummaryItem key={cartItem.id} item={cartItem} />);
+    let cartItems = cart.map((cartItem, index) => <CartSummaryItem key={index} item={cartItem} />);
 
     let cartPrices = cart.map(cartPrice => cartPrice.price);
 
     function getSum(total, num) {
-      return total + num;
+      return parseInt(total) + parseInt(num);
     }
 
     let cartTotal = cartPrices.reduce(getSum, 0);
 
     let cartItemsView = (
-      <div>
+      <div className="cart-item-container">
+        <div className="cart-item">
+          <div className="cart-item-desc">Product</div>
+          <div className="cart-item-quantity">Quantity</div>
+          <div className="cart-item-price">Price</div>
+        </div>
         {cartItems}
-        <div className="cart-total-price">Item Total: {(cartTotal / 100).toFixed(2)}</div>
-        <div className="btn checkout-btn" onClick={() => this.props.setViewCallback('checkout', {})}>Checkout</div>
+        <div className="cart-total-price">Subtotal: {(cartTotal / 100).toFixed(2)}</div>
+        <div className="cart-checkout">
+          <div className="btn checkout-btn" onClick={() => this.props.setViewCallback('checkout', {})}>Checkout</div>
+        </div>
       </div>
     );
 
