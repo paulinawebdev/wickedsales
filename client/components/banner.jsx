@@ -12,7 +12,7 @@ export default class Banner extends React.Component {
         <div className="pg-width">
           <div className="banner-inner">
             <h1>Wicked Sales</h1>
-            <p>Shop the Largest Selection of Spooky Pins</p>
+            <p>Check Our Collection of Spooky Pins</p>
           </div>
         </div>
       </div>

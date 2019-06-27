@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
@@ -15,11 +16,11 @@ export default class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.getData(this.props.id);
+    this.getData(this.props.match.params.id);
   }
 
   getData(id) {
-    fetch('api/products.php?id=' + id)
+    fetch('/api/products.php?id=' + id)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -53,7 +54,7 @@ export default class ProductDetails extends React.Component {
 
       if (this.state.project.url !== null) {
         numOfImages = this.state.project.url.length + 1;
-        moreImages = this.state.project.url.map((productImg, index) => <div key={index}><img src={productImg}/></div>);
+        moreImages = this.state.project.url.map((productImg, index) => <div className="slide-img" key={index}><img src={productImg}/></div>);
       }
 
     }
@@ -61,7 +62,7 @@ export default class ProductDetails extends React.Component {
     return (
       <div className="pg-content">
         <div className="pg-width">
-          <div className="back-btn" onClick={() => this.props.setViewCallback('catalog', {})}><i className="fas fa-chevron-left"></i> Back to Catalog</div>
+          <div className="back-btn"><Link to="/"><i className="fas fa-chevron-left"></i> Back to Catalog</Link></div>
 
           <div className="prod-detail">
             <div className="prod-detail-img">
@@ -70,7 +71,7 @@ export default class ProductDetails extends React.Component {
                 asNavFor={this.state.bottomImgSlider}
                 ref={slider => (this.slider1 = slider)}
               >
-                <div>
+                <div className="slide-img">
                   <img src={this.state.project ? this.state.project.image : ''} />
                 </div>
                 {moreImages}
@@ -84,7 +85,7 @@ export default class ProductDetails extends React.Component {
                 swipeToSlide={true}
                 focusOnSelect={true}
               >
-                <div>
+                <div className="slide-img">
                   <img src={this.state.project ? this.state.project.image : ''} />
                 </div>
                 {moreImages}

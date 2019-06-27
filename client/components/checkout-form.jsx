@@ -1,5 +1,6 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
+import { Link } from 'react-router-dom';
 
 export default class CheckoutForm extends React.Component {
   constructor(props) {
@@ -59,7 +60,7 @@ export default class CheckoutForm extends React.Component {
     return (
       <div className="pg-content">
         <div className="checkout-page pg-width">
-          <div className="back-btn" onClick={() => this.props.setViewCallback('cart', {})}><i className="fas fa-chevron-left"></i> Back to Cart</div>
+          <div className="back-btn"><Link to="/cart"><i className="fas fa-chevron-left"></i> Back to Cart</Link></div>
           <h1>Checkout</h1>
           <div className="checkout-content">
             <form className="checkout-form" onSubmit={this.submitForm}>

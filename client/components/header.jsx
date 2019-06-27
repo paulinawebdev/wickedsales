@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Header extends React.Component {
 
@@ -7,11 +8,11 @@ export default class Header extends React.Component {
       <header>
         <div className="pg-width">
           <div className="header-content">
-            <div className="logo" onClick={() => this.props.setViewCallback('catalog', {})}><h1><i className="fas fa-bolt"></i> Wicked Sales</h1></div>
-            <div className="header-cart" onClick={() => this.props.setViewCallback('cart', {})}>
+            <div className="logo"><Link to="/"><h1><i className="fas fa-bolt"></i> Wicked Sales</h1></Link></div>
+            <Link className="header-cart" to="/cart">
               <i className="fas fa-shopping-cart"></i>
               <span className="cart-amount">({this.props.cartItems.length})</span>
-            </div>
+            </Link>
           </div>
         </div>
       </header>

@@ -1,5 +1,6 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
+import { Link } from 'react-router-dom';
 
 export default class CartSummary extends React.Component {
 
@@ -26,7 +27,7 @@ export default class CartSummary extends React.Component {
         {cartItems}
         <div className="cart-total-price">Subtotal: {(cartTotal / 100).toFixed(2)}</div>
         <div className="cart-checkout">
-          <div className="btn checkout-btn" onClick={() => this.props.setViewCallback('checkout', {})}>Checkout</div>
+          <Link to="/checkout"><div className="btn checkout-btn">Checkout</div></Link>
         </div>
       </div>
     );
@@ -34,7 +35,7 @@ export default class CartSummary extends React.Component {
     return (
       <div className="pg-content">
         <div className="cart-summary pg-width">
-          <div className="back-btn" onClick={() => this.props.setViewCallback('catalog', {})}><i className="fas fa-chevron-left"></i> Back to Catalog</div>
+          <div className="back-btn"><Link to="/"><i className="fas fa-chevron-left"></i> Back to Catalog</Link></div>
           <h1>My Cart</h1>
           {cartItems.length ? cartItemsView : 'No Cart Items'}
         </div>
