@@ -1,5 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './header';
+import Banner from './banner';
+import Footer from './footer';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
@@ -12,16 +15,13 @@ export default class App extends React.Component {
 
     this.state = {
       products: [],
-      view: {
-        name: 'catalog',
-        params: {}
-      },
-      cart: []
+      cart: [],
+      detailId: null
     };
 
-    this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.setProjectDetailId = this.setProjectDetailId.bind(this);
 
   }
 
@@ -31,19 +31,19 @@ export default class App extends React.Component {
   }
 
   getProducts() {
-    fetch('api/products.php')
+    fetch('/api/products.php')
       .then(res => res.json())
       .then(data => this.setState({ products: data }));
   }
 
   getCartItems() {
-    fetch('api/cart.php')
+    fetch('/api/cart.php')
       .then(res => res.json())
       .then(data => this.setState({ cart: data }));
   }
 
   addToCart(product) {
-    fetch('api/cart.php', {
+    fetch('/api/cart.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ export default class App extends React.Component {
   }
 
   placeOrder(orderInfo) {
-    fetch('api/orders.php', {
+    fetch('/api/orders.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -67,39 +67,36 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(data => data);
-
-    this.setState({ cart: [], view: { name: 'catalog', params: {} } });
   }
 
-  setView(name, params) {
-    this.setState(
-      {
-        view: {
-          name: name,
-          params: params
-        }
-      });
+  setProjectDetailId(id) {
+    this.setState({ detailId: id });
   }
 
   render() {
 
-    let view;
-
-    if (this.state.view.name === 'catalog') {
-      view = <ProductList setViewCallback={this.setView} products={this.state.products} />;
-    } else if (this.state.view.name === 'details') {
-      view = <ProductDetails setViewCallback={this.setView} cartCallback={this.addToCart} id={this.state.view.params.id} />;
-    } else if (this.state.view.name === 'cart') {
-      view = <CartSummary setViewCallback={this.setView} cartSummary={this.state.cart} />;
-    } else if (this.state.view.name === 'checkout') {
-      view = <CheckoutForm placeOrderCallback={this.placeOrder} />;
-    }
-
     return (
-      <div>
-        <Header cartItems={this.state.cart} setViewCallback={this.setView} />
-        {view}
-      </div>
+      <Router>
+        <div className="wrapper">
+          <Header cartItems={this.state.cart} />
+          <Route exact path="/" render={props =>
+            <div>
+              <Banner image="/images/banner-5.jpg" />
+              <ProductList {...props} products={this.state.products} projIdCallback={this.setProjectDetailId}/>
+            </div>
+          } />
+          <Route path="/product/:id" render={props =>
+            <ProductDetails {...props} cartCallback={this.addToCart} id={this.state.detailId} />
+          } />
+          <Route path="/cart" render={props =>
+            <CartSummary {...props} cartSummary={this.state.cart} />
+          } />
+          <Route path="/checkout" render={props =>
+            <CheckoutForm {...props} placeOrderCallback={this.placeOrder} cartSummary={this.state.cart} />
+          } />
+        </div>
+        <Footer/>
+      </Router>
     );
   }
 }
