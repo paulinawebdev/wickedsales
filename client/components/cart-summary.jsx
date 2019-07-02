@@ -4,11 +4,16 @@ import { Link } from 'react-router-dom';
 
 export default class CartSummary extends React.Component {
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
 
     const cart = this.props.cartSummary;
-    let cartItems = cart.map((cartItem, index) => <CartSummaryItem key={index} item={cartItem} />);
-
+    let cartItems = cart.map((cartItem, index) => {
+      <CartSummaryItem key={index} item={cartItem} />;
+    });
     let cartPrices = cart.map(cartPrice => cartPrice.price);
 
     function getSum(total, num) {
@@ -21,8 +26,9 @@ export default class CartSummary extends React.Component {
       <div className="cart-item-container">
         <div className="cart-item">
           <div className="cart-item-desc">Product</div>
-          <div className="cart-item-quantity">Quantity</div>
           <div className="cart-item-price">Price</div>
+          <div className="cart-item-quantity">Quantity</div>
+          <div className="cart-item-total">Total</div>
         </div>
         {cartItems}
         <div className="cart-total-price">Subtotal: {(cartTotal / 100).toFixed(2)}</div>

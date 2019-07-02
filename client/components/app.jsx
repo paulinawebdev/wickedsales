@@ -42,7 +42,7 @@ export default class App extends React.Component {
       .then(data => this.setState({ cart: data }));
   }
 
-  addToCart(product) {
+  addToCart(product, quantity) {
     fetch('/api/cart.php', {
       method: 'POST',
       headers: {
@@ -52,7 +52,10 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        const newProductList = this.state.cart.concat(data);
+        let newProductList = this.state.cart.concat(data);
+        for (let i = 1; i < quantity; i++) {
+          newProductList = newProductList.concat(data);
+        }
         this.setState({ cart: newProductList });
       });
   }
@@ -74,14 +77,13 @@ export default class App extends React.Component {
   }
 
   render() {
-
     return (
       <Router>
         <div className="wrapper">
           <Header cartItems={this.state.cart} />
           <Route exact path="/" render={props =>
             <div>
-              <Banner image="/images/banner-5.jpg" />
+              <Banner image="/images/banner-1.jpg" />
               <ProductList {...props} products={this.state.products} projIdCallback={this.setProjectDetailId}/>
             </div>
           } />

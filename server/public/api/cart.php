@@ -7,6 +7,7 @@ $item = file_get_contents('php://input');
 
 if ($method == 'GET') {
   //readfile('dummy-cart-items.json');
+  print json_encode([]);
 } else if ($method == 'POST') {
   http_response_code(201);
   print($item);
