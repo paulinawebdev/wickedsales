@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Header from './header';
 import Banner from './banner';
 import Footer from './footer';
@@ -16,12 +16,14 @@ export default class App extends React.Component {
     this.state = {
       products: [],
       cart: [],
+      cartQuantity: 0,
       detailId: null
     };
 
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.setProjectDetailId = this.setProjectDetailId.bind(this);
+    this.calcCartAmount = this.calcCartAmount.bind(this);
 
   }
 
@@ -52,12 +54,29 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        let newProductList = this.state.cart.concat(data);
-        for (let i = 1; i < quantity; i++) {
-          newProductList = newProductList.concat(data);
+        let parsedQuantity = parseInt(quantity);
+        let index = this.state.cart.findIndex(p => p.id == data.id);
+        let newProductList = null;
+        if (index === -1) {
+          data["quantity"] = parsedQuantity;
+          newProductList = this.state.cart.concat(data);
+          this.setState({ cart: newProductList }, ()=>{this.calcCartAmount()});
+        } else {
+          newProductList = this.state.cart;
+          newProductList[index].quantity += parsedQuantity;
+          this.setState({cart: newProductList}, ()=>{this.calcCartAmount()});
         }
-        this.setState({ cart: newProductList });
       });
+  }
+
+  calcCartAmount() {
+    let amount = 0;
+    for (let i=0; i < this.state.cart.length; i++) {
+      amount += this.state.cart[i].quantity;
+    }
+    this.setState({
+      cartQuantity: amount
+    })
   }
 
   placeOrder(orderInfo) {
@@ -80,7 +99,7 @@ export default class App extends React.Component {
     return (
       <Router>
         <div className="wrapper">
-          <Header cartItems={this.state.cart} />
+          <Header cartItems={this.state.cartQuantity} />
           <Route exact path="/" render={props =>
             <div>
               <Banner image="/images/banner-1.jpg" />
@@ -91,7 +110,15 @@ export default class App extends React.Component {
             <ProductDetails {...props} cartCallback={this.addToCart} id={this.state.detailId} />
           } />
           <Route path="/cart" render={props =>
-            <CartSummary {...props} cartSummary={this.state.cart} />
+          <div className="pg-content">
+            <div className="cart-summary pg-width">
+              <div className="back-btn">
+                <Link to="/"><i className="fas fa-chevron-left"></i> Back to Catalog</Link>
+              </div>
+              <h1>My Cart</h1>
+              <CartSummary {...props} cartSummary={this.state.cart} />
+            </div>
+          </div>
           } />
           <Route path="/checkout" render={props =>
             <CheckoutForm {...props} placeOrderCallback={this.placeOrder} cartSummary={this.state.cart} />

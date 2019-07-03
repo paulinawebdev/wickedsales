@@ -4,23 +4,23 @@ import { Link } from 'react-router-dom';
 
 export default class CartSummary extends React.Component {
 
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
   render() {
-
     const cart = this.props.cartSummary;
-    let cartItems = cart.map((cartItem, index) => {
-      <CartSummaryItem key={index} item={cartItem} />;
+    
+    let cartItems = cart.map((cartItem) => {
+        return <CartSummaryItem key={cartItem.id} item={cartItem} quantity={cartItem.quantity} />
     });
-    let cartPrices = cart.map(cartPrice => cartPrice.price);
 
-    function getSum(total, num) {
-      return parseInt(total) + parseInt(num);
-    }
+    let addedPrice = 0;
 
-    let cartTotal = cartPrices.reduce(getSum, 0);
+    cart.forEach(
+      (element)=> {
+        let parsedPrice = parseInt(element.price)
+        addedPrice += ((parsedPrice / 100) * element.quantity);
+        console.log("added price", addedPrice)
+      }
+    );
+    addedPrice = addedPrice.toFixed(2);
 
     let cartItemsView = (
       <div className="cart-item-container">
@@ -31,7 +31,7 @@ export default class CartSummary extends React.Component {
           <div className="cart-item-total">Total</div>
         </div>
         {cartItems}
-        <div className="cart-total-price">Subtotal: {(cartTotal / 100).toFixed(2)}</div>
+        <div className="cart-total-price">Subtotal: {addedPrice}</div>
         <div className="cart-checkout">
           <Link to="/checkout"><div className="btn checkout-btn">Checkout</div></Link>
         </div>
@@ -39,13 +39,9 @@ export default class CartSummary extends React.Component {
     );
 
     return (
-      <div className="pg-content">
-        <div className="cart-summary pg-width">
-          <div className="back-btn"><Link to="/"><i className="fas fa-chevron-left"></i> Back to Catalog</Link></div>
-          <h1>My Cart</h1>
-          {cartItems.length ? cartItemsView : 'No Cart Items'}
-        </div>
-      </div>
+      <React.Fragment>
+        {cartItems.length ? cartItemsView : <div className="empty-cart"><img src="/images/empty-cart.svg"/>No Cart Items</div>}
+      </React.Fragment>
     );
   }
 }

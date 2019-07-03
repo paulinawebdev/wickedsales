@@ -1,6 +1,7 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 import { Link } from 'react-router-dom';
+import CartSummary from './cart-summary';
 
 export default class CheckoutForm extends React.Component {
   constructor(props) {
@@ -15,6 +16,10 @@ export default class CheckoutForm extends React.Component {
 
     this.changeHandler = this.changeHandler.bind(this);
     this.submitForm = this.submitForm.bind(this);
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   changeHandler(event) {
@@ -46,17 +51,6 @@ export default class CheckoutForm extends React.Component {
     const classCard = this.state.creditCard ? 'label-show' : null;
     const classAddress = this.state.shippingAddress ? 'label-show' : null;
 
-    const cart = this.props.cartSummary;
-    let cartItems = cart.map((cartItem, index) => <CartSummaryItem key={index} item={cartItem} />);
-
-    let cartPrices = cart.map(cartPrice => cartPrice.price);
-
-    function getSum(total, num) {
-      return parseInt(total) + parseInt(num);
-    }
-
-    let cartTotal = cartPrices.reduce(getSum, 0);
-
     return (
       <div className="pg-content">
         <div className="checkout-page pg-width">
@@ -85,8 +79,7 @@ export default class CheckoutForm extends React.Component {
             </form>
             <div className="cart-checkout-summary">
               <h5>Cart Summary</h5>
-              {cartItems}
-              <div className="cart-total-price">Subtotal: {(cartTotal / 100).toFixed(2)}</div>
+              <CartSummary cartSummary={this.props.cartSummary} />
             </div>
           </div>
         </div>
