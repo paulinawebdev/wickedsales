@@ -422,6 +422,14 @@ footer {
     text-align: right;
 }
 
+.cart-item-remove {
+    font-size: .9rem;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 1rem 0;
+    color: #B24B52;
+}
+
 /*checkout page*/
 .checkout-content {
     display: flex;
@@ -514,4 +522,8 @@ footer {
     .cart-item-total {
         width: 18%;
     }
+    .cart-item-remove {
+        margin: .25rem 0;
+    }
+    
 }

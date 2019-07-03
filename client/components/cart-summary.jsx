@@ -17,7 +17,6 @@ export default class CartSummary extends React.Component {
       (element)=> {
         let parsedPrice = parseInt(element.price)
         addedPrice += ((parsedPrice / 100) * element.quantity);
-        console.log("added price", addedPrice)
       }
     );
     addedPrice = addedPrice.toFixed(2);

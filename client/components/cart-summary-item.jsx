@@ -9,7 +9,10 @@ export default class CartSummaryItem extends React.Component {
       <div className="cart-item">
         <div className="cart-item-desc">
           <div className="cart-item-img"><img src={cartItem.image} /></div>
-          <p>{cartItem.name}</p>
+          <div>
+            <p>{cartItem.name}</p>
+            <div class="cart-item-remove">Remove</div>
+          </div>
         </div>
         <div className="cart-item-price">${cartPrice}</div>
         <div className="cart-item-quantity">{this.props.quantity}</div>
