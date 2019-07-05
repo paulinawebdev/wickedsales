@@ -42,7 +42,13 @@ export default class App extends React.Component {
     fetch('/api/cart.php')
       .then(res => res.json())
       .then(data => {
-        this.setState({ cart: data })
+        console.log("data?", data)
+        if (data.products.length > 0) {
+          this.setState({ cart: data.products }, ()=> {
+            console.log("data", this.state.cart)
+            this.calcCartAmount();
+          })
+        }
       });
   }
 
@@ -56,25 +62,29 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        let parsedQuantity = parseInt(quantity);
-        let index = this.state.cart.findIndex(p => p.id == data.id);
-        let newProductList = null;
-        if (index === -1) {
-          data["quantity"] = parsedQuantity;
-          newProductList = this.state.cart.concat(data);
-          this.setState({ cart: newProductList }, ()=>{this.calcCartAmount()});
-        } else {
-          newProductList = this.state.cart;
-          newProductList[index].quantity += parsedQuantity;
-          this.setState({cart: newProductList}, ()=>{this.calcCartAmount()});
-        }
+        console.log("data", data)
+        // let parsedQuantity = parseInt(quantity);
+        // let index = this.state.cart.findIndex(p => p.id == data.id);
+        // let newProductList = null;
+        // if (index === -1) {
+        //   data["quantity"] = parsedQuantity;
+        //   newProductList = this.state.cart.concat(data);
+        //   this.setState({ cart: newProductList }, ()=>{this.calcCartAmount()});
+        // } else {
+        //   newProductList = this.state.cart;
+        //   newProductList[index].quantity += parsedQuantity;
+        //   this.setState({cart: newProductList}, ()=>{this.calcCartAmount()});
+        // }
+
+        //this.setState({cart: data.data}, ()=>console.log("cart state", this.state.cart))
+
       });
   }
 
   calcCartAmount() {
     let amount = 0;
     for (let i=0; i < this.state.cart.length; i++) {
-      amount += this.state.cart[i].quantity;
+      amount += parseInt(this.state.cart[i].quantity);
     }
     this.setState({
       cartQuantity: amount

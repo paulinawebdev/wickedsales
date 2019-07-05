@@ -11,7 +11,7 @@ export default class CartSummaryItem extends React.Component {
           <div className="cart-item-img"><img src={cartItem.image} /></div>
           <div>
             <p>{cartItem.name}</p>
-            <div class="cart-item-remove">Remove</div>
+            <div className="cart-item-remove">Remove</div>
           </div>
         </div>
         <div className="cart-item-price">${cartPrice}</div>
