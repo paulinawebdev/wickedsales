@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class CartSummaryItem extends React.Component {
 
@@ -8,7 +9,7 @@ export default class CartSummaryItem extends React.Component {
     return (
       <div className="cart-item">
         <div className="cart-item-desc">
-          <div className="cart-item-img"><img src={cartItem.image} /></div>
+          <div className="cart-item-img"><Link to={"/product/" + cartItem.prod_id}><img src={cartItem.image} /></Link></div>
           <div>
             <p>{cartItem.name}</p>
             <div className="cart-item-remove">Remove</div>

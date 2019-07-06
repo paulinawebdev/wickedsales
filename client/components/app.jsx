@@ -42,7 +42,7 @@ export default class App extends React.Component {
     fetch('/api/cart.php')
       .then(res => res.json())
       .then(data => {
-        console.log("data?", data)
+        console.log("data?", data);
         if (data.products.length > 0) {
           this.setState({ cart: data.products }, ()=> {
             console.log("data", this.state.cart)
@@ -53,31 +53,20 @@ export default class App extends React.Component {
   }
 
   addToCart(product, quantity) {
+
+    let data = {product: product, quantity: quantity};
+
     fetch('/api/cart.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(product)
+      body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(data => {
-        console.log("data", data)
-        // let parsedQuantity = parseInt(quantity);
-        // let index = this.state.cart.findIndex(p => p.id == data.id);
-        // let newProductList = null;
-        // if (index === -1) {
-        //   data["quantity"] = parsedQuantity;
-        //   newProductList = this.state.cart.concat(data);
-        //   this.setState({ cart: newProductList }, ()=>{this.calcCartAmount()});
-        // } else {
-        //   newProductList = this.state.cart;
-        //   newProductList[index].quantity += parsedQuantity;
-        //   this.setState({cart: newProductList}, ()=>{this.calcCartAmount()});
-        // }
-
-        //this.setState({cart: data.data}, ()=>console.log("cart state", this.state.cart))
-
+        console.log("added data", data)
+        this.getCartItems(); 
       });
   }
 
