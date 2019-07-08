@@ -16,12 +16,12 @@ export default class ProductList extends React.Component {
   render() {
     const products = this.props.products;
 
-    let productItems = products.map(productItem => <ProductListItem handleDetails={ () => this.handleDetails(productItem)} key={productItem.id} id={productItem.id} image={productItem.image} name={productItem.name} price={productItem.price} description={productItem.shortDescription} />);
+    let productItems = products.map(productItem => <ProductListItem handleDetails={ () => this.handleDetails(productItem)} key={productItem.id} id={productItem.id} image={productItem.image} secImage={productItem.url[0]} name={productItem.name} price={productItem.price} description={productItem.shortDescription} />);
 
     return (
       <div className="pg-content">
         <div className="pg-width">
-          <h1 className="pg-title">Pin Collection</h1>
+          <h1 className="pg-title">Wicked T Shirt Collection</h1>
           <div className="prod-list">
             {productItems}
           </div>

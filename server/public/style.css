@@ -42,7 +42,7 @@ img {
     text-align: center;
     max-width: 150px;
     cursor: pointer;
-    transition: background .25s;
+    transition: background-color .25s;
 }
 
 .btn:hover {
@@ -68,9 +68,10 @@ img {
     position: relative;
     padding: .75rem;
     width: 100%;
-    max-width: 355px;
+    max-width: 400px;
     font-family: 'Josefin Sans', sans-serif;
-    border: 1px solid #5E5D5A;
+    border: 1px solid #CCC;
+    border-radius: 5px;
 }
 
 .form-input input + label, .form-input textarea + label {
@@ -88,6 +89,75 @@ img {
 
 .form-input input:focus + label, .form-input textarea:focus + label {
     top: -10px;
+}
+
+.error-msg {
+    color: red;
+    margin-top: .5rem;
+    font-size: .9rem;
+}
+
+/*cart quantity*/
+.cart-quantity {
+    margin-right: 1px;
+}
+.cart-quantity input {
+    padding: .5rem;
+    display: inline-block;
+    max-width: 65px;
+}
+
+/*accordion*/
+.accordion {
+    width: 100%;
+    max-width: 600px;
+}
+.accordion-btn {
+    background-color: #434343;
+    color: #FFF;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    transition: background-color .25s;
+    position: relative;
+    margin-bottom: 2px;
+}
+.accordion-btn:before {
+    content: "▾";
+    font-size: 2rem;
+    position: absolute;
+    top: 55%;
+    right: 15px;
+    transform: translateY(-50%);
+    transition: transform .3s, right .3s;
+}
+.accordion-btn.active:before {
+    right: 20px;
+    transform: translateY(-50%) rotate(60deg);
+}
+.accordion-btn:hover {
+    background-color: #5E5D5A;
+}
+.accordion-item {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all .3s;
+}
+
+.accordion-item.active{
+    padding: 1rem;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+}
+.accordion-item ul {
+    padding-left: 1rem;
+    margin-top: .5rem;
+}
+
+.accordion-size-guide td{
+    text-align: center;
+    padding: .2rem 0;
 }
 
 /*header*/
@@ -188,7 +258,7 @@ footer {
     top: 50%;
     transform: translateY(-50%);
     padding: 2rem 1.5rem;
-    border: 1px solid;
+    border: 2px solid;
     background-color: rgba(0,0,0,.7);
 }
 .banner-inner > *:not(:last-child) {
@@ -227,19 +297,14 @@ footer {
 
 .prod-card-img {
     overflow: hidden;
-    background-color: #CBC9C5;
 }
 
 .prod-card .prod-card-img img {
     transition: all .5s;
 }
 
-.prod-card:hover .prod-card-img img {
-    transform: scale(1.2);
-}
-
 .prod-card-name {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 
@@ -285,7 +350,14 @@ footer {
 }
 
 /*cart*/
-
+.empty-cart {
+    text-align: center;
+}
+.empty-cart img {
+    max-width: 300px;
+    margin: auto;
+    display: block;
+}
 .cart-summary h1 {
     margin-bottom: 1rem;
 }
@@ -328,7 +400,11 @@ footer {
 
 .cart-item-price {
     text-align: right;
-    width: 30%;
+    width: 20%;
+}
+.cart-item-total {
+    text-align: right;
+    width: 10%;
 }
 
 .cart-checkout {
@@ -347,7 +423,24 @@ footer {
     text-align: right;
 }
 
+.cart-item-remove {
+    font-size: .9rem;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 1rem 0;
+    color: #B24B52;
+}
+
+.cart-checkout-summary .cart-item {
+    border: 1px solid #CCC;
+}
+
 /*checkout page*/
+.checkout-page h1 {
+    border-bottom: 1px solid #5E5D5A;
+    padding-bottom: .5rem;
+    margin-bottom: 1rem;
+}
 .checkout-content {
     display: flex;
     flex-wrap: wrap;
@@ -358,17 +451,33 @@ footer {
     width: 50%;
     padding: 1rem;
 }
-.checkout-content h5 {
+.checkout-content h4 {
     text-transform: uppercase;
-    text-decoration: underline;
-}
-.checkout-form h5 {
     margin-bottom: 2rem;
 }
 .checkout-total {
     margin: 2rem 0;
 }
-
+.checkout-summary {
+    max-width: 600px;
+    margin: 1rem auto;
+    display: block;
+    text-align: center;
+}
+.checkout-summary h2 {
+    background-color: #353535;
+    color: #FFF;
+    padding: 1rem;
+    text-transform: uppercase;
+}
+.checkout-info {
+    border: 1px solid #353535;
+    padding: 1rem;
+}
+.checkout-info p {
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
 
 /*media queries*/
 @media screen and (max-width: 1000px) {
@@ -432,4 +541,17 @@ footer {
     .prod-card-container {
         width: 100%;
     }
+    .cart-item {
+        font-size: .9rem;
+    }
+    .cart-item-desc {
+        width: 30%;
+    }
+    .cart-item-total {
+        width: 18%;
+    }
+    .cart-item-remove {
+        margin: .25rem 0;
+    }
+    
 }
