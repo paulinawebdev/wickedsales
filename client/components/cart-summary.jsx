@@ -6,9 +6,16 @@ export default class CartSummary extends React.Component {
 
   render() {
     const cart = this.props.cartSummary;
+
+    const cartPage = this.props.page;
+    
+    let checkoutBtn = "";
+    if (cartPage === "cart-summary") {
+      checkoutBtn = <div className="cart-checkout"> <Link to="/checkout"><div className="btn checkout-btn">Checkout</div> </Link> </div>;
+    }
     
     let cartItems = cart.map((cartItem) => {
-        return <CartSummaryItem key={cartItem.cart_id} item={cartItem} quantity={cartItem.quantity} deleteCallback={this.props.deleteCallback} />
+        return <CartSummaryItem key={cartItem.cart_id} page={this.props.page} item={cartItem} quantity={cartItem.quantity} deleteCallback={this.props.deleteCallback} />
     });
 
     let addedPrice = 0;
@@ -30,10 +37,8 @@ export default class CartSummary extends React.Component {
           <div className="cart-item-total">Total</div>
         </div>
         {cartItems}
-        <div className="cart-total-price">Subtotal: {addedPrice}</div>
-        <div className="cart-checkout">
-          <Link to="/checkout"><div className="btn checkout-btn">Checkout</div></Link>
-        </div>
+        <div className="cart-total-price">Subtotal: ${addedPrice}</div>
+        {checkoutBtn}
       </div>
     );
 

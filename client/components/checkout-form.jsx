@@ -1,5 +1,4 @@
 import React from 'react';
-import CartSummaryItem from './cart-summary-item';
 import { Link } from 'react-router-dom';
 import CartSummary from './cart-summary';
 
@@ -15,7 +14,6 @@ export default class CheckoutForm extends React.Component {
     };
 
     this.changeHandler = this.changeHandler.bind(this);
-    this.submitForm = this.submitForm.bind(this);
   }
 
   componentDidMount() {
@@ -39,12 +37,6 @@ export default class CheckoutForm extends React.Component {
     }
   }
 
-  submitForm(event) {
-    event.preventDefault();
-
-    this.props.placeOrderCallback(this.state);
-  }
-
   render() {
     const className = this.state.name ? 'label-show' : null;
     const classEmail = this.state.email ? 'label-show' : null;
@@ -52,13 +44,14 @@ export default class CheckoutForm extends React.Component {
     const classAddress = this.state.shippingAddress ? 'label-show' : null;
 
     return (
+      
       <div className="pg-content">
         <div className="checkout-page pg-width">
           <div className="back-btn"><Link to="/cart"><i className="fas fa-chevron-left"></i> Back to Cart</Link></div>
           <h1>Checkout</h1>
           <div className="checkout-content">
-            <form className="checkout-form" onSubmit={this.submitForm}>
-              <h5>Customer Information</h5>
+            <div className="checkout-form">
+              <h4>Customer Information</h4>
               <div className="form-input">
                 <input id="custName" type="text" name="customerName" onChange={this.changeHandler} value={this.state.name} required />
                 <label className={className} htmlFor="custName">Name</label>
@@ -75,11 +68,15 @@ export default class CheckoutForm extends React.Component {
                 <textarea id="custAddress" name="customerAddress" onChange={this.changeHandler} value={this.state.shippingAddress} required></textarea>
                 <label className={classAddress} htmlFor="custAddress">Shipping Address</label>
               </div>
-              <button type="submit" className="btn">Submit</button>
-            </form>
+              <div className="form-input">
+                <small>*Please do not use real information. This is not a real shop.</small>
+              </div>
+              
+              <Link to="/checkout-summary" onClick={this.props.deleteCart} className="btn">Place Order</Link>
+            </div>
             <div className="cart-checkout-summary">
-              <h5>Cart Summary</h5>
-              <CartSummary cartSummary={this.props.cartSummary} />
+              <h4>Cart Summary</h4>
+              <CartSummary cartSummary={this.props.cartSummary} page="checkout" />
             </div>
           </div>
         </div>

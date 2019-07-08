@@ -7,6 +7,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import CheckoutSummary from './checkout-summary';
 
 export default class App extends React.Component {
 
@@ -14,6 +15,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
+      user: null,
       products: [],
       cart: [],
       cartQuantity: 0,
@@ -25,6 +27,7 @@ export default class App extends React.Component {
     this.setProjectDetailId = this.setProjectDetailId.bind(this);
     this.calcCartAmount = this.calcCartAmount.bind(this);
     this.deleteCartItem = this.deleteCartItem.bind(this);
+    this.deleteCart = this.deleteCart.bind(this);
 
   }
 
@@ -85,6 +88,18 @@ export default class App extends React.Component {
       });
   }
 
+  deleteCart() {
+    fetch('/api/checkout_delete_cart.php', {
+      method: 'DELETE'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data === "success") {
+          this.getCartItems()
+        }
+      });
+  }
+
   calcCartAmount() {
     let amount = 0;
     for (let i=0; i < this.state.cart.length; i++) {
@@ -132,12 +147,15 @@ export default class App extends React.Component {
                 <Link to="/"><i className="fas fa-chevron-left"></i> Back to Catalog</Link>
               </div>
               <h1>My Cart</h1>
-              <CartSummary {...props} deleteCallback={this.deleteCartItem} cartSummary={this.state.cart} />
+              <CartSummary {...props} page="cart-summary" deleteCallback={this.deleteCartItem} cartSummary={this.state.cart} />
             </div>
           </div>
           } />
           <Route path="/checkout" render={props =>
-            <CheckoutForm {...props} placeOrderCallback={this.placeOrder} cartSummary={this.state.cart} />
+            <CheckoutForm {...props} placeOrderCallback={this.placeOrder} cartSummary={this.state.cart} deleteCart={this.deleteCart} />
+          } />
+          <Route path="/checkout-summary" render={props =>
+            <CheckoutSummary {...props} />
           } />
         </div>
         <Footer/>
