@@ -517,7 +517,7 @@ footer {
         width: 50%;
     }
     .cart-item {
-        padding: 1rem 0;
+        padding: 1rem .25rem;
     }
     .cart-item-desc {
         display: block;
