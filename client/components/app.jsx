@@ -24,6 +24,7 @@ export default class App extends React.Component {
     this.placeOrder = this.placeOrder.bind(this);
     this.setProjectDetailId = this.setProjectDetailId.bind(this);
     this.calcCartAmount = this.calcCartAmount.bind(this);
+    this.deleteCartItem = this.deleteCartItem.bind(this);
 
   }
 
@@ -42,12 +43,14 @@ export default class App extends React.Component {
     fetch('/api/cart.php')
       .then(res => res.json())
       .then(data => {
-        console.log("data?", data);
-        if (data.products.length > 0) {
-          this.setState({ cart: data.products }, ()=> {
-            console.log("data", this.state.cart)
-            this.calcCartAmount();
-          })
+        if (data.length !== 0) {
+          if (data.products.length > 0) {
+            this.setState({ cart: data.products }, ()=> {
+              this.calcCartAmount();
+            })
+          }
+        } else {
+          this.setState({ cart: [], cartQuantity: 0 });
         }
       });
   }
@@ -65,8 +68,20 @@ export default class App extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log("added data", data)
         this.getCartItems(); 
+      });
+  }
+
+  deleteCartItem(cartItem) {
+    fetch('/api/delete_cart.php', {
+      method: 'DELETE',
+      body: cartItem
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data === "success") {
+          this.getCartItems()
+        }
       });
   }
 
@@ -117,7 +132,7 @@ export default class App extends React.Component {
                 <Link to="/"><i className="fas fa-chevron-left"></i> Back to Catalog</Link>
               </div>
               <h1>My Cart</h1>
-              <CartSummary {...props} cartSummary={this.state.cart} />
+              <CartSummary {...props} deleteCallback={this.deleteCartItem} cartSummary={this.state.cart} />
             </div>
           </div>
           } />

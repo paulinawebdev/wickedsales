@@ -12,7 +12,7 @@ export default class CartSummaryItem extends React.Component {
           <div className="cart-item-img"><Link to={"/product/" + cartItem.prod_id}><img src={cartItem.image} /></Link></div>
           <div>
             <p>{cartItem.name}</p>
-            <div className="cart-item-remove">Remove</div>
+            <div className="cart-item-remove" onClick={()=>this.props.deleteCallback(cartItem.cart_id)}>Remove</div>
           </div>
         </div>
         <div className="cart-item-price">${cartPrice}</div>

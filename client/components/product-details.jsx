@@ -21,6 +21,7 @@ export default class ProductDetails extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 150);
     this.getData(this.props.match.params.id);
   }
 
