@@ -21,7 +21,7 @@ $output = '';
 
 
 if ($user !== null) {
-    $query = "DELETE FROM `cart` WHERE `user_id`=$user";
+    $query = "DELETE FROM `cart` WHERE `user_id`='$user'";
 
     if ($result = mysqli_query($conn, $query)) {
         $output = 'success';
