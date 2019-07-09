@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartSummary from './cart-summary';
+import { withRouter } from 'react-router-dom'
 
 export default class CheckoutForm extends React.Component {
   constructor(props) {
@@ -10,10 +11,13 @@ export default class CheckoutForm extends React.Component {
       name: '',
       email: '',
       creditCard: '',
-      shippingAddress: ''
+      shippingAddress: '',
+      formComplete: true
     };
 
     this.changeHandler = this.changeHandler.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+    this.checkForm = this.checkForm.bind(this);
   }
 
   componentDidMount() {
@@ -36,12 +40,25 @@ export default class CheckoutForm extends React.Component {
         break;
     }
   }
+  checkForm() {
+    if (!this.state.name || !this.state.email || !this.state.creditCard || !this.state.shippingAddress) {
+      this.setState({formComplete: false})
+    }
+  }
+
+  submitForm(event) {
+    event.preventDefault();
+    this.props.deleteCart();
+    this.props.history.push('/checkout-summary');
+  }
 
   render() {
-    const className = this.state.name ? 'label-show' : null;
-    const classEmail = this.state.email ? 'label-show' : null;
-    const classCard = this.state.creditCard ? 'label-show' : null;
-    const classAddress = this.state.shippingAddress ? 'label-show' : null;
+    let className = this.state.name ? 'label-show' : null;
+    let classEmail = this.state.email ? 'label-show' : null;
+    let classCard = this.state.creditCard ? 'label-show' : null;
+    let classAddress = this.state.shippingAddress ? 'label-show' : null;
+    let errorMsg = this.state.formComplete ? "" : <div className="error-msg">Form must be completed</div>
+
 
     return (
       
@@ -50,7 +67,7 @@ export default class CheckoutForm extends React.Component {
           <div className="back-btn"><Link to="/cart"><i className="fas fa-chevron-left"></i> Back to Cart</Link></div>
           <h1>Checkout</h1>
           <div className="checkout-content">
-            <div className="checkout-form">
+            <form className="checkout-form" onSubmit={this.submitForm}>
               <h4>Customer Information</h4>
               <div className="form-input">
                 <input id="custName" type="text" name="customerName" onChange={this.changeHandler} value={this.state.name} required />
@@ -71,9 +88,9 @@ export default class CheckoutForm extends React.Component {
               <div className="form-input">
                 <small>*Please do not use real information. This is not a real shop.</small>
               </div>
-              
-              <Link to="/checkout-summary" onClick={this.props.deleteCart} className="btn">Place Order</Link>
-            </div>
+              <button type="submit" className="btn" onClick={this.checkForm}>Place Order</button>
+              {errorMsg}
+            </form>
             <div className="cart-checkout-summary">
               <h4>Cart Summary</h4>
               <CartSummary cartSummary={this.props.cartSummary} page="checkout" />
