@@ -7,20 +7,12 @@
     "build": "webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "dependencies": {
     "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "react-dom": "16.8.6",
+    "react-router-dom": "5.0.1",
+    "react-slick": "0.24.0",
+    "slick-carousel": "1.8.1"
   },
   "devDependencies": {
     "@babel/core": "7.4.4",
@@ -40,60 +32,6 @@
     "webpack": "4.31.0",
     "webpack-cli": "3.3.2",
     "webpack-dev-server": "3.3.1"
-  },
-  "eslintIgnore": [
-    "server/public/main.js"
-  ],
-  "eslintConfig": {
-    "env": {
-      "browser": true,
-      "node": true
-    },
-    "parser": "babel-eslint",
-    "extends": [
-      "plugin:react/recommended",
-      "eslint:recommended",
-      "standard"
-    ],
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    },
-    "rules": {
-      "semi": [
-        "error",
-        "always"
-      ],
-      "padded-blocks": 0,
-      "arrow-parens": [
-        "error",
-        "as-needed"
-      ],
-      "curly": [
-        "error",
-        "multi-line"
-      ],
-      "no-console": [
-        "error",
-        {
-          "allow": [
-            "warn",
-            "error"
-          ]
-        }
-      ],
-      "space-before-function-paren": [
-        "error",
-        {
-          "anonymous": "always",
-          "named": "never",
-          "asyncArrow": "always"
-        }
-      ],
-      "react/prop-types": 0,
-      "react/react-in-jsx-scope": 0
-    }
   },
   "repository": {
     "type": "git",
