@@ -336,6 +336,10 @@ footer {
     max-width: 70px;
 }
 
+.prod-detail-sm-img .slick-slide img{
+    cursor: pointer;
+}
+
 .prod-detail-info {
     width: 65%;
     padding: 2rem;
