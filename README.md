@@ -4,7 +4,7 @@ A full stack LAMP & React shopping cart app.
 
 ## Introduction
 
-For this project, I built a single-page React application and a dynamic PHP API.
+For this project, I built a single-page React application and used PHP for the backend.
 
 ## Features
 
